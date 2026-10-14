@@ -1,0 +1,6 @@
+{
+  "name": "EPSCO Project Costing, Profit Analysis & Quotation Calculator",
+  "description": "Comprehensive project costing, profit margin analysis, actual expense tracking, and customer quotation calculator for EPSCO LLC UAE divisions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

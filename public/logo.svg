@@ -1,0 +1,131 @@
+<svg viewBox="0 0 500 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gold Sun & Om Gradient -->
+    <linearGradient id="goldSunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="45%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- Royal Blue to Dark Navy 3D Ribbon -->
+    <linearGradient id="blueRibbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="35%" stop-color="#0284C7" />
+      <stop offset="70%" stop-color="#1D4ED8" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <!-- Blue to Vibrant Emerald Green Ribbon for 'P' -->
+    <linearGradient id="blueGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1D4ED8" />
+      <stop offset="40%" stop-color="#0284C7" />
+      <stop offset="80%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <!-- Lotus Petal Deep Royal Blue -->
+    <linearGradient id="lotusBlueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="40%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0C4A6E" />
+    </linearGradient>
+
+    <!-- Lotus Outer Wings -->
+    <linearGradient id="lotusWingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#1E3A8A" />
+    </linearGradient>
+
+    <!-- Golden Flame Core -->
+    <linearGradient id="goldenFlameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A" />
+      <stop offset="40%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- Network Node Gradients -->
+    <linearGradient id="nodeCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="nodeGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- Subtle Glow Shadow Filter -->
+    <filter id="brandGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0284C7" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- TOP EMBLEM (Center at X=250) -->
+  <g transform="translate(50, 0)">
+    <!-- 1. Sun Rays & Halo -->
+    <path d="M200 12 L200 36" stroke="url(#goldSunGrad)" stroke-width="6" stroke-linecap="round" />
+    <path d="M162 22 L172 44" stroke="url(#goldSunGrad)" stroke-width="5" stroke-linecap="round" />
+    <path d="M238 22 L228 44" stroke="url(#goldSunGrad)" stroke-width="5" stroke-linecap="round" />
+    <path d="M130 45 L148 62" stroke="url(#goldSunGrad)" stroke-width="5" stroke-linecap="round" />
+    <path d="M270 45 L252 62" stroke="url(#goldSunGrad)" stroke-width="5" stroke-linecap="round" />
+    <path d="M108 78 L130 88" stroke="url(#goldSunGrad)" stroke-width="5" stroke-linecap="round" />
+    <path d="M292 78 L270 88" stroke="url(#goldSunGrad)" stroke-width="5" stroke-linecap="round" />
+    <path d="M125 105 A 85 85 0 0 1 275 105" fill="none" stroke="url(#goldSunGrad)" stroke-width="6" stroke-linecap="round" />
+
+    <!-- Sacred Om (ॐ) -->
+    <text x="200" y="86" text-anchor="middle" fill="url(#goldSunGrad)" font-family="'Sanskrit Text', 'Nirmala UI', 'Mangal', 'Segoe UI', serif" font-size="44" font-weight="bold" filter="url(#brandGlow)">ॐ</text>
+
+    <!-- Digital Network Connected Nodes -->
+    <g transform="translate(245, 78)">
+      <circle cx="10" cy="22" r="7" fill="url(#nodeGreenGrad)" />
+      <line x1="16" y1="20" x2="30" y2="12" stroke="#0284C7" stroke-width="3" />
+      <line x1="16" y1="24" x2="30" y2="34" stroke="#0284C7" stroke-width="3" />
+      <rect x="28" y="2" width="16" height="16" rx="4" fill="url(#nodeCyanGrad)" />
+      <rect x="28" y="24" width="16" height="16" rx="4" fill="#0284C7" />
+      <rect x="48" y="16" width="12" height="12" rx="3" fill="url(#nodeGreenGrad)" />
+      <line x1="44" y1="10" x2="48" y2="18" stroke="#10B981" stroke-width="2.5" />
+    </g>
+
+    <!-- 3D Ribbon SP Monogram -->
+    <path d="M210 98 C160 98 128 120 135 155 C142 190 190 192 235 205 C265 214 278 230 265 250 C250 270 205 272 170 262 L160 278 C205 292 268 290 286 256 C302 226 278 198 230 188 C185 178 155 170 152 148 C149 126 178 116 215 116 C238 116 260 124 275 134 L285 115 C262 102 235 98 210 98 Z" fill="url(#blueRibbonGrad)" />
+    <path d="M210 132 C265 132 290 148 290 178 C290 208 260 225 215 225 L215 206 C245 206 268 196 268 178 C268 160 248 151 210 151 L195 151 L195 132 Z" fill="url(#blueGreenGrad)" />
+
+    <!-- Lotus Flower Base -->
+    <path d="M200 285 C145 285 100 255 75 205 C98 245 145 270 200 275 Z" fill="url(#lotusWingGrad)" stroke="#F59E0B" stroke-width="1.5" />
+    <path d="M200 285 C130 285 85 240 65 185 C95 235 150 265 200 272 Z" fill="url(#lotusBlueGrad)" />
+    <path d="M200 285 C255 285 300 255 325 205 C302 245 255 270 200 275 Z" fill="url(#lotusWingGrad)" stroke="#F59E0B" stroke-width="1.5" />
+    <path d="M200 285 C270 285 315 240 335 185 C305 235 250 265 200 272 Z" fill="url(#lotusBlueGrad)" />
+    <path d="M200 290 C155 290 115 260 105 220 C130 255 165 275 200 280 C235 275 270 255 295 220 C285 260 245 290 200 290 Z" fill="url(#lotusBlueGrad)" stroke="#FBBF24" stroke-width="1" />
+    <path d="M200 300 C165 300 135 285 120 265 C145 282 172 292 200 294 C228 292 255 282 280 265 C265 285 235 300 200 300 Z" fill="#0C4A6E" />
+
+    <!-- Meditating Silhouette Figure with Golden Flame -->
+    <circle cx="200" cy="192" r="10" fill="#0284C7" />
+    <circle cx="200" cy="192" r="7" fill="#38BDF8" />
+    <path d="M192 204 C175 210 162 230 152 252 C168 250 185 244 192 234 Z" fill="#0284C7" />
+    <path d="M208 204 C225 210 238 230 248 252 C232 250 215 244 208 234 Z" fill="#0284C7" />
+    <path d="M200 265 C165 265 148 250 150 238 C165 240 185 248 200 256 C215 248 235 240 250 238 C252 250 235 265 200 265 Z" fill="#0C4A6E" stroke="#0284C7" stroke-width="2" />
+    <path d="M200 206 C195 214 192 224 196 232 C198 236 200 242 200 248 C200 242 202 236 204 232 C208 224 205 214 200 206 Z" fill="url(#goldenFlameGrad)" filter="url(#brandGlow)" />
+  </g>
+
+  <!-- 2. BRAND TYPOGRAPHY: SUBRAT IQ -->
+  <g id="brand-typography">
+    <text x="250" y="375" text-anchor="middle" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="44" letter-spacing="2">
+      <tspan fill="#0F172A">SUBRAT</tspan>
+      <tspan dx="10" fill="#0284C7">I</tspan><tspan fill="#10B981">Q</tspan>
+    </text>
+
+    <!-- Golden Chevron Accent below the 'A' in SUBRAT -->
+    <polygon points="282,382 287,389 277,389" fill="#F59E0B" />
+  </g>
+
+  <!-- 3. TAGLINE: Ideas • Apps • Innovation -->
+  <g id="brand-tagline">
+    <text x="250" y="415" text-anchor="middle" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="16" fill="#334155" letter-spacing="3">
+      Ideas <tspan fill="#0284C7" font-size="20">•</tspan> Apps <tspan fill="#10B981" font-size="20">•</tspan> Innovation
+    </text>
+
+    <!-- Decorative Symmetry Line with Gold Center Diamond -->
+    <line x1="120" y1="438" x2="230" y2="438" stroke="url(#nodeCyanGrad)" stroke-width="2" stroke-linecap="round" />
+    <polygon points="250,433 255,438 250,443 245,438" fill="#F59E0B" />
+    <line x1="270" y1="438" x2="380" y2="438" stroke="url(#nodeGreenGrad)" stroke-width="2" stroke-linecap="round" />
+  </g>
+</svg>
