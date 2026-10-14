@@ -31,8 +31,12 @@ import {
   Info,
   SlidersHorizontal,
   ExternalLink,
-  Paperclip
+  Paperclip,
+  List,
+  CalendarRange,
+  Calendar
 } from 'lucide-react';
+import { ProjectTimelineView } from './ProjectTimelineView';
 import {
   ResponsiveContainer,
   PieChart,
@@ -178,6 +182,35 @@ export const Dashboard: React.FC<DashboardProps> = ({
       return true;
     });
   }, [projects, actualCostMap, showArchived, alertFilter, divisionFilter, contractTypeFilter, statusFilter, searchTerm]);
+
+  // View mode for Project Register vs Timeline & Overlap Gantt
+  const [projectViewMode, setProjectViewMode] = useState<'table' | 'timeline'>('table');
+
+  // Compute number of projects with scheduling overlaps in the filtered list
+  const overlapCount = useMemo(() => {
+    let count = 0;
+    const list = filteredProjects;
+    for (let i = 0; i < list.length; i++) {
+      const a = list[i];
+      const aStart = a.startDate;
+      const aEnd = a.expectedCompletionDate || a.startDate;
+      let hasConflict = false;
+      for (let j = 0; j < list.length; j++) {
+        if (i === j) continue;
+        const b = list[j];
+        const bStart = b.startDate;
+        const bEnd = b.expectedCompletionDate || b.startDate;
+        if (aStart && aEnd && bStart && bEnd) {
+          if (aStart <= bEnd && bStart <= aEnd) {
+            hasConflict = true;
+            break;
+          }
+        }
+      }
+      if (hasConflict) count++;
+    }
+    return count;
+  }, [filteredProjects]);
 
   // Unique divisions for filter dropdown
   const divisions = useMemo(() => {
@@ -392,8 +425,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
-      {/* Critical Alert Filters (Section 11) */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      {/* Critical Alert Filters & Schedule Intelligence (Section 11) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {/* Budget Overrun Alert */}
         <div
           onClick={() => setAlertFilter(alertFilter === 'OVERRUN' ? 'ALL' : 'OVERRUN')}
@@ -460,6 +493,36 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
           <span className="text-sm font-black px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">
             {stats.pendingApprovalCount}
+          </span>
+        </div>
+
+        {/* Scheduling Overlaps & Timeline Quick Link */}
+        <div
+          onClick={() => {
+            setProjectViewMode('timeline');
+            const el = document.getElementById('project-view-section');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
+            projectViewMode === 'timeline'
+              ? 'bg-purple-50 border-purple-400 ring-2 ring-purple-400 shadow-xs'
+              : 'bg-white border-slate-200 hover:border-purple-300'
+          }`}
+          title="Switch to timeline Gantt view to visualize scheduling overlaps"
+        >
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-purple-100 text-purple-700">
+              <CalendarRange className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-slate-900">Scheduling Overlaps</div>
+              <div className="text-[11px] text-slate-500">Timeline & Gantt view</div>
+            </div>
+          </div>
+          <span className={`text-sm font-black px-2.5 py-0.5 rounded-full ${
+            overlapCount > 0 ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-700'
+          }`}>
+            {overlapCount}
           </span>
         </div>
       </div>
@@ -865,6 +928,61 @@ export const Dashboard: React.FC<DashboardProps> = ({
         ) : null}
       </div>
 
+      {/* Project View Section Header & View Switcher */}
+      <div id="project-view-section" className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+        <div>
+          <h2 className="text-sm font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
+            <Layers className="w-4 h-4 text-blue-600" />
+            <span>Project Registry & Schedule Operations</span>
+          </h2>
+          <p className="text-xs text-slate-500">
+            {projectViewMode === 'table'
+              ? 'Complete project costing register, approval statuses, financial margins, and quick actions'
+              : 'Gantt schedule timeline plotting start and completion dates with automated overlap conflict detection'}
+          </p>
+        </div>
+
+        {/* View Switcher Toggle */}
+        <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 shrink-0">
+          <button
+            onClick={() => setProjectViewMode('table')}
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              projectViewMode === 'table'
+                ? 'bg-white text-slate-900 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <List className="w-4 h-4 text-blue-600" />
+            <span>Table Register</span>
+            <span className="px-1.5 py-0.2 rounded bg-slate-200 text-slate-700 font-mono text-[10px]">
+              {filteredProjects.length}
+            </span>
+          </button>
+
+          <button
+            onClick={() => setProjectViewMode('timeline')}
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              projectViewMode === 'timeline'
+                ? 'bg-white text-slate-900 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <CalendarRange className="w-4 h-4 text-purple-600" />
+            <span>Schedule Timeline</span>
+            {overlapCount > 0 ? (
+              <span className="px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 font-bold text-[10px] flex items-center gap-0.5" title={`${overlapCount} projects have overlapping dates`}>
+                <AlertTriangle className="w-3 h-3 text-amber-600" />
+                {overlapCount} Overlaps
+              </span>
+            ) : (
+              <span className="px-1.5 py-0.2 rounded bg-slate-200 text-slate-700 font-mono text-[10px]">
+                {filteredProjects.length}
+              </span>
+            )}
+          </button>
+        </div>
+      </div>
+
       {/* Filter & Search Bar */}
       <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs space-y-3">
         <div className="flex flex-col md:flex-row gap-3">
@@ -957,8 +1075,17 @@ export const Dashboard: React.FC<DashboardProps> = ({
         )}
       </div>
 
-      {/* Projects Table (Section 11) */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      {/* Projects View: Timeline Gantt vs Table Register */}
+      {projectViewMode === 'timeline' ? (
+        <ProjectTimelineView
+          projects={filteredProjects}
+          onSelectProject={onSelectProject}
+          onOpenActuals={onOpenActuals}
+          onPrepareQuotation={onPrepareQuotation}
+        />
+      ) : (
+        /* Projects Table (Section 11) */
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
             <thead className="bg-slate-100 text-slate-700 font-bold border-b border-slate-200 uppercase tracking-wider">
@@ -1193,6 +1320,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </table>
         </div>
       </div>
+      )}
     </div>
   );
 };
